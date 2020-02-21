@@ -1,0 +1,14 @@
+Links:
+
+Common Github commands:
+https://github.github.com/training-kit/downloads/github-git-cheat-sheet/
+
+Starting Windows Services:
+https://stackoverflow.com/questions/8164859/install-a-windows-service-using-a-windows-command-prompt
+
+https://www.shellhacks.com/windows-start-service-cmd-powershell/
+
+
+https://stackoverflow.com/questions/40434679/c-sharp-get-all-open-browsing-tabs-in-all-instances-of-firefox
+
+
