@@ -1,6 +1,6 @@
 ﻿namespace PCParentService
 {
-    partial class Service1
+    partial class PCParentService
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,10 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            this.eventLog1 = new System.Diagnostics.EventLog();
+            this.process1 = new System.Diagnostics.Process();
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
+            // 
+            // process1
+            // 
+            this.process1.StartInfo.Domain = "";
+            this.process1.StartInfo.LoadUserProfile = false;
+            this.process1.StartInfo.Password = null;
+            this.process1.StartInfo.StandardErrorEncoding = null;
+            this.process1.StartInfo.StandardOutputEncoding = null;
+            this.process1.StartInfo.UserName = "";
+            // 
+            // PCParentService
+            // 
+            this.ServiceName = "PCParentService";
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
+
         }
 
         #endregion
+
+        private System.Diagnostics.EventLog eventLog1;
+        private System.Diagnostics.Process process1;
     }
 }

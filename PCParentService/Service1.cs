@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace PCParentService
 {
-    public partial class Service1 : ServiceBase
+    public partial class PCParentService : ServiceBase
     {
-        public Service1()
+        public PCParentService()
         {
             InitializeComponent();
         }
