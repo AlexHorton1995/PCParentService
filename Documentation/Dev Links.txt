@@ -11,4 +11,5 @@ https://www.shellhacks.com/windows-start-service-cmd-powershell/
 
 https://stackoverflow.com/questions/40434679/c-sharp-get-all-open-browsing-tabs-in-all-instances-of-firefox
 
-
+Setup config file:
+https://support.microsoft.com/en-us/help/815786/how-to-store-and-retrieve-custom-information-from-an-application-confi
