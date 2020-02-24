@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PCParentService
 {
-    class MailClientNotify
+    class MailClientNotify : IMailClientNotify
     {
         public string ToEmail { get; set; }
         public string FromEmail { get; set; }
