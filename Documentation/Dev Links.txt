@@ -20,3 +20,11 @@ https://www.google.com/search?safe=active&client=firefox-b-1-d&sxsrf=ALeKk03TeDa
 tutorial on how to create a windows service:
 https://docs.microsoft.com/en-us/dotnet/framework/windows-services/walkthrough-creating-a-windows-service-application-in-the-component-designer
 
+Getting Assembly Version:
+https://stackoverflow.com/questions/15126113/getting-assembly-version-from-assemblyinfo-cs
+
+Test Project:
+https://www.c-sharpcorner.com/UploadFile/dacca2/test-initialize-and-test-setup/
+
+
+
