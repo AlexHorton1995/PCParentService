@@ -7,8 +7,6 @@ Starting Windows Services:
 https://stackoverflow.com/questions/8164859/install-a-windows-service-using-a-windows-command-prompt
 
 https://www.shellhacks.com/windows-start-service-cmd-powershell/
-
-
 https://stackoverflow.com/questions/40434679/c-sharp-get-all-open-browsing-tabs-in-all-instances-of-firefox
 
 Setup config file:
@@ -18,3 +16,7 @@ setup hash:
 https://stackoverflow.com/questions/12416249/hashing-a-string-with-sha256
 
 https://www.google.com/search?safe=active&client=firefox-b-1-d&sxsrf=ALeKk03TeDa3lx4vtAWlFd97L0DpGCK7yQ:1582354030828&q=c%23+sha256+hash+with+key&sa=X&ved=2ahUKEwjglqqPyOTnAhUFSK0KHWyoBz0Q1QIoAHoECAsQAQ&biw=1920&bih=966
+
+tutorial on how to create a windows service:
+https://docs.microsoft.com/en-us/dotnet/framework/windows-services/walkthrough-creating-a-windows-service-application-in-the-component-designer
+

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -25,7 +26,10 @@ namespace PCParentService
         {
             try
             {
-                ToEmail = "alexhortdog95@msn.com";
+                //creates an SMTPClient to send the email.
+                SmtpClient client = new SmtpClient(SMTPServer);
+                MailPriority priority = new MailPriority();
+                ToEmail = "alex.d.horton95@gmail.com";
 
                 switch (notifyType)
                 {
@@ -47,8 +51,9 @@ namespace PCParentService
                 //creates a new instance of MailMessage
                 MailMessage message = new MailMessage(FromEmail, ToEmail, Subject, EmailBody);
 
-                //creates an SMTPClient to send the email.
-                SmtpClient client = new SmtpClient(SMTPServer);
+                //if restricted activity, send a high priority message.
+                if (notifyType == 2)
+                    message.Priority = MailPriority.High;
 
                 /*
                     // Add credentials if the SMTP server requires them.
@@ -62,6 +67,13 @@ namespace PCParentService
                 }
                 catch (SmtpException smtpEx)
                 {
+                    using (EventLog eventLog = new EventLog("Application"))
+                    {
+                        eventLog.Source = "Application";
+                        eventLog.WriteEntry("There was an exception in the PCParent Service", EventLogEntryType.Information, 101, 1);
+                    }
+
+
                     //log to the application log if an exception
                     //TODO - PUT LOGGING CODE HERE
 
