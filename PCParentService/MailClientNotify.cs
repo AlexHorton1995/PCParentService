@@ -5,10 +5,12 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
-namespace PCParentService
+[assembly: InternalsVisibleTo("PCParentTestProject")]
+namespace PCParentServiceApp
 {
-    class MailClientNotify : IMailClientNotify
+    internal class MailClientNotify : IMailClientNotify
     {
         public string ToEmail { get; set; }
         public string FromEmail { get; set; }
@@ -16,6 +18,8 @@ namespace PCParentService
         public string EmailBody { get; set; }
         public string SMTPServer { get; set; }
         public int SMTPPort { get; set; }
+
+
 
         /// <summary>
         /// Sends an email notification as needed
@@ -28,7 +32,6 @@ namespace PCParentService
             {
                 //creates an SMTPClient to send the email.
                 SmtpClient client = new SmtpClient(SMTPServer);
-                MailPriority priority = new MailPriority();
                 ToEmail = "alex.d.horton95@gmail.com";
 
                 switch (notifyType)
@@ -64,14 +67,15 @@ namespace PCParentService
                 {
                     //send the message
                     client.Send(message);
-                }
-                catch (SmtpException smtpEx)
-                {
                     using (EventLog eventLog = new EventLog("Application"))
                     {
                         eventLog.Source = "Application";
                         eventLog.WriteEntry("There was an exception in the PCParent Service", EventLogEntryType.Information, 101, 1);
                     }
+
+                }
+                catch (SmtpException smtpEx)
+                {
 
 
                     //log to the application log if an exception

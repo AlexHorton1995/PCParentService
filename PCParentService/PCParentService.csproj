@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A47A2707-4B7A-4C96-8238-7DE1F238F3FB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>PCParentService</RootNamespace>
+    <RootNamespace>PCParentServiceApp</RootNamespace>
     <AssemblyName>PCParentService</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILoggerClass.cs" />
     <Compile Include="IMailClientNotify.cs" />
+    <Compile Include="LoggerClass.cs" />
     <Compile Include="MailClientNotify.cs" />
     <Compile Include="ParentService.cs">
       <SubType>Component</SubType>

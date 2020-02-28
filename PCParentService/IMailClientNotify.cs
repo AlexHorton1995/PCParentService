@@ -1,6 +1,6 @@
-﻿namespace PCParentService
+﻿namespace PCParentServiceApp
 {
-    interface IMailClientNotify
+    public interface IMailClientNotify
     {
         string ToEmail { get; set; }
         string FromEmail { get; set; }

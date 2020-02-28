@@ -1,4 +1,4 @@
-﻿namespace PCParentService
+﻿namespace PCParentServiceApp
 {
     partial class PCParentService
     {

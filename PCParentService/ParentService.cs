@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.ServiceProcess;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.ServiceProcess;
 using System.Timers;
+using System.Runtime.CompilerServices;
 
-namespace PCParentService
+[assembly: InternalsVisibleTo("PCParentTestProject")]
+namespace PCParentServiceApp
 {
     public partial class PCParentService : ServiceBase
     {
-        private int eventId = 1;
+        ILoggerClass logger;
 
         /// <summary>
         /// constructor for new service
@@ -23,25 +15,22 @@ namespace PCParentService
         public PCParentService()
         {
             InitializeComponent();
-            eventLog1 = new System.Diagnostics.EventLog();
-
-            if (!System.Diagnostics.EventLog.SourceExists("PCParentService"))
-                System.Diagnostics.EventLog.CreateEventSource("PCParentService", "PCParentLog");
-
-            eventLog1.Source = "PCParentService";
-            eventLog1.Log = "PCParentLog";
-
-
+            logger = new LoggerClass();
+            logger.WriteLoginToEventViewer();
         }
 
         protected override void OnStart(string[] args)
         {
-            eventLog1.WriteEntry("Starting PCParentService, version " + Assembly.GetCallingAssembly());
             // Set up a timer that triggers every minute.
             System.Timers.Timer timer = new System.Timers.Timer();
             timer.Interval = 60000; // 60 seconds
             timer.Elapsed += new ElapsedEventHandler(this.OnTimer);
             timer.Start();
+
+            IMailClientNotify notify = new MailClientNotify();
+
+            //send notification on start of service.
+            notify.SendEmailNotification(1);
         }
 
         protected override void OnStop()
@@ -52,7 +41,6 @@ namespace PCParentService
         public void OnTimer(object sender, ElapsedEventArgs args)
         {
             // TODO: Insert monitoring activities here.
-            eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
         }
         #endregion
     }
