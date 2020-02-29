@@ -1,8 +1,10 @@
-﻿namespace PCParentServiceApp
+﻿using System.Net.Mail;
+
+namespace PCParentServiceApp
 {
     public interface IMailClientNotify
     {
-        string ToEmail { get; set; }
+        MailAddress ToEmail { get; set; }
         string FromEmail { get; set; }
         string Subject { get; set; }
         string EmailBody { get; set; }

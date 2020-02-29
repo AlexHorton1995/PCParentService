@@ -26,5 +26,11 @@ https://stackoverflow.com/questions/15126113/getting-assembly-version-from-assem
 Test Project:
 https://www.c-sharpcorner.com/UploadFile/dacca2/test-initialize-and-test-setup/
 
+using MailMessage Class:
+https://stackoverflow.com/questions/17962784/using-mailmessage-to-send-emails-in-c-sharp
+
+Mail Delivery Exception:
+https://docs.microsoft.com/en-us/exchange/troubleshoot/mail-delivery/mapiexceptionnotfound-ndr
+
 
 

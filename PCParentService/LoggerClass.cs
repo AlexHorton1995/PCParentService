@@ -17,14 +17,26 @@ namespace PCParentServiceApp
 
         public void WriteLoginToEventViewer()
         {
+            eventId = 1;
             eventLog1 = new System.Diagnostics.EventLog();
             if (!System.Diagnostics.EventLog.SourceExists("PCParentService"))
                 System.Diagnostics.EventLog.CreateEventSource("PCParentService", "PCParentLog");
 
             eventLog1.Source = "PCParentService";
             eventLog1.Log = "PCParentLog";
-
             eventLog1.WriteEntry("Starting PCParentService, version " + Assembly.GetCallingAssembly());
+            eventLog1.WriteEntry("Process Started...", EventLogEntryType.Information, (int)EventLogTypes.Login);
+
+        }
+
+        public void WriteTransactionToEventViewer()
+        {
+            var message = "Successful Transaction";
+            using (EventLog eventLog = new EventLog("Application"))
+            {
+                eventLog.Source = "Application";
+                eventLog.WriteEntry(message, EventLogEntryType.Information, (int)EventLogTypes.Success, 1);
+            }
         }
 
         public void WriteExceptionToEventViewer(string exception)
@@ -42,7 +54,9 @@ namespace PCParentServiceApp
 
     public enum EventLogTypes
     {
-        Success = 100,
-        Exception = 102
+        Login = 100,
+        Success = 101,
+        TransactSuccess = 102,
+        Exception = 103
     }
 }
