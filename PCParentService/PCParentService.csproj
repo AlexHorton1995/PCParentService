@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationClass.cs" />
+    <Compile Include="BrowserSniffer.cs" />
     <Compile Include="IAuthenticationClass.cs" />
     <Compile Include="ILoggerClass.cs" />
     <Compile Include="IMailClientNotify.cs" />

@@ -20,6 +20,7 @@ namespace PCParentServiceApp
         public string EmailPassword { get; set; }
         public int SMTPPort { get; set; }
         ILoggerClass logger = new LoggerClass();
+        IAuthenticationClass credentialKeys = new AuthenticationClass();
 
         /// <summary>
         /// Sends an email notification as needed
@@ -30,6 +31,16 @@ namespace PCParentServiceApp
         {
             try
             {
+                var credKeys = credentialKeys.RetrieveCredentials();
+                foreach(var cKeys in credKeys)
+                {
+                    if (cKeys.Key == "User")
+                        FromEmail = cKeys.Value;
+
+                    if (cKeys.Key == "Password")
+                        EmailPassword = cKeys.Value;
+                }
+
 
                 switch (notifyType)
                 {
@@ -47,6 +58,18 @@ namespace PCParentServiceApp
                 using (SmtpClient client = new SmtpClient())
                 using (MailMessage msg = new MailMessage())
                 {
+#if DEBUG
+                    //Set port, host, and to emails here;
+                    ToEmail = new MailAddress("alex.d.horton95@gmail.com");
+                    SMTPPort = 587;
+                    SMTPServer = "smtp.live.com";
+#else
+                //Set port, host, and to emails here;
+                FromEmail = "*****";
+                ToEmail = new MailAddress("*****");
+                SMTPPort = 587;
+                SMTPServer = "smtp.live.com";
+#endif
                     msg.To.Add(ToEmail);
                     msg.From = new MailAddress(FromEmail);
                     msg.Subject = Subject;
@@ -59,26 +82,14 @@ namespace PCParentServiceApp
                     client.Host = SMTPServer;
                     client.EnableSsl = true;
 
-#if DEBUG
-                    //Set port, host, and to emails here;
-                    FromEmail = "*****";
-                    ToEmail = new MailAddress("*****");
-                    SMTPPort = 587;
-                    SMTPServer = "smtp.live.com";
-#else
-                //Set port, host, and to emails here;
-                FromEmail = "*****";
-                ToEmail = new MailAddress("*****");
-                SMTPPort = 587;
-                SMTPServer = "smtp.live.com";
-#endif
+
                     //put the outlook.com email and password here (masked, of course)
-                    client.Credentials = new System.Net.NetworkCredential("****", "****");
+                    client.Credentials = new System.Net.NetworkCredential(FromEmail, EmailPassword);
 
                     try
                     {
                         client.Send(msg);
-                        //TODO - put a logger.writeevent here
+                        //TODO - put a logger.write event here
                         logger.WriteTransactionToEventViewer();
 
                     }

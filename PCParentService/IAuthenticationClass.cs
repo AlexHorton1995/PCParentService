@@ -4,7 +4,7 @@ namespace PCParentServiceApp
 {
     interface IAuthenticationClass
     {
-        bool CreateCredentials();
-        List<string> RetrieveCredentials();
+        //bool CreateCredentials();
+        List<KeyValuePair<string,string>> RetrieveCredentials();
     }
 }

@@ -2,9 +2,9 @@
 {
     public interface ILoggerClass
     {
-        void WriteExceptionToEventViewer(string exception);
         void WriteLoginToEventViewer();
         void WriteTransactionToEventViewer();
+        void WriteExceptionToEventViewer(string exception);
         void WriteLogoffToEventViewer();
     }
 }

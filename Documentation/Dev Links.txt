@@ -23,16 +23,23 @@ https://docs.microsoft.com/en-us/dotnet/framework/windows-services/walkthrough-c
 Getting Assembly Version:
 https://stackoverflow.com/questions/15126113/getting-assembly-version-from-assemblyinfo-cs
 
-Test Project:
+Creating a Test Project:
 https://www.c-sharpcorner.com/UploadFile/dacca2/test-initialize-and-test-setup/
 
-using MailMessage Class:
+Using MailMessage Class to send emails:
 https://stackoverflow.com/questions/17962784/using-mailmessage-to-send-emails-in-c-sharp
 
 Mail Delivery Exception:
 https://docs.microsoft.com/en-us/exchange/troubleshoot/mail-delivery/mapiexceptionnotfound-ndr
 
-Using SHA256 hash
+Using SHA256 hash:
 https://stackoverflow.com/questions/212510/what-is-the-easiest-way-to-encrypt-a-password-when-i-save-it-to-the-registry
 
+Using KeyValuePairs:
+https://www.dotnetperls.com/keyvaluepair
 
+Grab running processes with c#:
+https://stackoverflow.com/questions/262280/how-can-i-know-if-a-process-is-running
+
+Grab Active Browser Windows
+https://stackoverflow.com/questions/40434679/c-sharp-get-all-open-browsing-tabs-in-all-instances-of-firefox?answertab=votes#tab-top

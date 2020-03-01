@@ -13,40 +13,27 @@ namespace PCParentServiceApp
     /// </summary>
     class AuthenticationClass : IAuthenticationClass
     {
-        public bool CreateCredentials()
+
+        public List<KeyValuePair<string,string>> RetrieveCredentials()
         {
-            string TestKey1 = "someemail@outlook.com";
-            string TestKey2 = "somepassword";
-
-            //Now, let's set three keys in the machine registry that will store our masked entries
-            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("PCParentKeys");
-
-            var byteArr = Encoding.Unicode.GetBytes(TestKey1);
-
-            key.SetValue("PCPUser", Convert.ToBase64String(Encoding.Unicode.GetBytes(TestKey1)));
-            key.SetValue("PCPPass", Convert.ToBase64String(Encoding.Unicode.GetBytes(TestKey2)));
-            key.Close();
-
-            return true;
-        }
-
-        public List<string> RetrieveCredentials()
-        {
-            List<string> retStr = new List<string>();
+            var retList = new List<KeyValuePair<string, string>>();
 
             //logic to retrieve a registry key value
-            const string rt = "HKEY_CURRENT_USER";
-            const string sk = "TestKeys";  //your original key name will go here.
-            const string kn = rt + "\\" + sk;
+            string rt = "HKEY_CURRENT_USER";
+            string sk = "PCParentKeys";  //your original key name will go here.
+            string kn = string.Format(@"{0}\{1}", rt, sk);
 
             //get the keys out of the registry.
-            var keya = Microsoft.Win32.Registry.GetValue(kn, "PCPUser", "novalue");
-            var keyb = Microsoft.Win32.Registry.GetValue(kn, "PCPPass", "novalue");
+            var userNameKey = Microsoft.Win32.Registry.GetValue(kn, "PCPUser", "novalue");
+            var passWordKey = Microsoft.Win32.Registry.GetValue(kn, "PCPPass", "novalue");
 
+            var userNameRes = Encoding.Unicode.GetString(Convert.FromBase64String(userNameKey.ToString()));
+            var passWordRes = Encoding.Unicode.GetString(Convert.FromBase64String(passWordKey.ToString()));
 
+            retList.Add(new KeyValuePair<string, string>("User", userNameRes));
+            retList.Add(new KeyValuePair<string, string>("Password", passWordRes));
 
-
-            return retStr;
+            return retList;
         }
 
 

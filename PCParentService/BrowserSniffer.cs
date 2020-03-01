@@ -1,0 +1,56 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+
+[assembly: InternalsVisibleTo("PCParentTestProject")]
+namespace PCParentServiceApp
+{
+    class BrowserSniffer
+    {
+        [DllImport("user32.dll")]
+        static extern int GetWindowTextLength(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+        public static List<string> PrintBrowserTabName()
+        {
+            List<string> retList = new List<string>();
+            var browsersList = new List<string>
+            {
+                "chrome",
+                "firefox",
+                "iexplore",
+                "edge"
+            };
+
+            foreach (var singleBrowser in browsersList)
+            {
+                var process = Process.GetProcessesByName(singleBrowser);
+                if (process.Length > 0)
+                {
+                    foreach (var proc in process)
+                    {
+                        IntPtr hWnd = proc.MainWindowHandle;
+                        int length = GetWindowTextLength(hWnd);
+                        if (length > 0)
+                        {
+                            StringBuilder text = new StringBuilder(length + 1);
+                            GetWindowText(hWnd, text, text.Capacity);
+                            retList.Add(text.ToString().ToLower());
+                        }
+                    }
+
+                }
+            }
+
+            return retList;
+        }
+
+    }
+}
