@@ -49,6 +49,17 @@ namespace PCParentServiceApp
             }
         }
 
+        public void WriteLogoffToEventViewer()
+        {
+
+            var message = string.Format(@"User Logged out at {0}", DateTime.Now.Date.ToString("MM-dd-yyyy HH:mm:ss"));
+            using (EventLog eventLog = new EventLog("Application"))
+            {
+                eventLog.Source = "Application";
+                eventLog.WriteEntry(message, EventLogEntryType.Information, (int)EventLogTypes.Logoff, 1);
+            }
+        }
+
 
     }
 
@@ -57,6 +68,7 @@ namespace PCParentServiceApp
         Login = 100,
         Success = 101,
         TransactSuccess = 102,
-        Exception = 103
+        Exception = 103, 
+        Logoff = 104
     }
 }

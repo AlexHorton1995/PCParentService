@@ -32,5 +32,7 @@ https://stackoverflow.com/questions/17962784/using-mailmessage-to-send-emails-in
 Mail Delivery Exception:
 https://docs.microsoft.com/en-us/exchange/troubleshoot/mail-delivery/mapiexceptionnotfound-ndr
 
+Using SHA256 hash
+https://stackoverflow.com/questions/212510/what-is-the-easiest-way-to-encrypt-a-password-when-i-save-it-to-the-registry
 
 

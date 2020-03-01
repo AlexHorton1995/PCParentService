@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthenticationClass.cs" />
+    <Compile Include="IAuthenticationClass.cs" />
     <Compile Include="ILoggerClass.cs" />
     <Compile Include="IMailClientNotify.cs" />
     <Compile Include="LoggerClass.cs" />
