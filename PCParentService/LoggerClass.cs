@@ -15,36 +15,39 @@ namespace PCParentServiceApp
         private int eventId = 1;
         private static EventLog eventLog1 = new EventLog();
 
-        public void WriteLoginToEventViewer()
+        public void CreateNewEventViewerLog()
         {
             eventId = 1;
             eventLog1 = new System.Diagnostics.EventLog();
             if (!System.Diagnostics.EventLog.SourceExists("PCParentService"))
                 System.Diagnostics.EventLog.CreateEventSource("PCParentService", "PCParentLog");
-
+            
             eventLog1.Source = "PCParentService";
             eventLog1.Log = "PCParentLog";
-            eventLog1.WriteEntry("Starting PCParentService, version " + Assembly.GetCallingAssembly());
-            eventLog1.WriteEntry("Process Started...", EventLogEntryType.Information, (int)EventLogTypes.Login);
-
         }
 
-        public void WriteTransactionToEventViewer()
+
+        public void WriteLoginToEventViewer()
         {
-            var message = "Successful Transaction";
-            using (EventLog eventLog = new EventLog("Application"))
+            eventLog1.WriteEntry("Starting PCParentService, version " + Assembly.GetCallingAssembly());
+            eventLog1.WriteEntry(string.Format("Process Started...{0} has logged in...", Environment.UserName), EventLogEntryType.Information, (int)EventLogTypes.Login);
+        }
+
+        public void WriteTransactionToEventViewer(string transaction)
+        {
+            using (EventLog eventLog = new EventLog("PCParentLog"))
             {
-                eventLog.Source = "Application";
-                eventLog.WriteEntry(message, EventLogEntryType.Information, (int)EventLogTypes.Success, 1);
+                eventLog.Source = "PCParentService";
+                eventLog.WriteEntry(transaction, EventLogEntryType.Information, (int)EventLogTypes.Success, 1);
             }
         }
 
         public void WriteExceptionToEventViewer(string exception)
         {
             var exMessage = string.Format(@"There was an exception in the PCParent Service: {0}", exception);
-            using (EventLog eventLog = new EventLog("Application"))
+            using (EventLog eventLog = new EventLog("PCParentLog"))
             {
-                eventLog.Source = "Application";
+                eventLog.Source = "PCParentService";
                 eventLog.WriteEntry(exMessage, EventLogEntryType.Error, (int)EventLogTypes.Exception, 1);
             }
         }
@@ -52,10 +55,10 @@ namespace PCParentServiceApp
         public void WriteLogoffToEventViewer()
         {
 
-            var message = string.Format(@"User Logged out at {0}", DateTime.Now.Date.ToString("MM-dd-yyyy HH:mm:ss"));
-            using (EventLog eventLog = new EventLog("Application"))
+            var message = string.Format(@"User {0} Logged out at {1}", Environment.UserName, DateTime.Now.Date.ToString("MM-dd-yyyy HH:mm:ss"));
+            using (EventLog eventLog = new EventLog("PCParentLog"))
             {
-                eventLog.Source = "Application";
+                eventLog.Source = "PCParentService";
                 eventLog.WriteEntry(message, EventLogEntryType.Information, (int)EventLogTypes.Logoff, 1);
             }
         }

@@ -12,6 +12,7 @@ namespace PCParentTestProject
         IMailClientNotify mockNotify;
         IAuthenticationClass mockAuthenticate;
         ILoggerClass mockLogger;
+        IBrowserSniffer mockSniffer;
 
         [TestInitialize]
         public void TestInitialize()
@@ -19,12 +20,31 @@ namespace PCParentTestProject
             mockNotify = new MailClientNotify();
             mockAuthenticate = new AuthenticationClass();
             mockLogger = new LoggerClass();
+            mockSniffer = new BrowserSniffer();
         }
 
         [TestMethod]
         public void TestEventViewerLogin()
         {
             mockLogger.WriteLoginToEventViewer();
+        }
+
+        [TestMethod]
+        public void CreateCredentials()
+        {
+            string TestKey1 = "someemail@outlook.com";
+            string TestKey2 = "somepassword";
+
+            //Now, let's set three keys in the machine registry that will store our masked entries
+            Microsoft.Win32.RegistryKey userKey = Microsoft.Win32.Registry.Users.OpenSubKey("Software", true);
+            userKey.CreateSubKey("PCParentKeys");
+            var byteArr = Encoding.Unicode.GetBytes(TestKey1);
+
+            userKey.SetValue("PCPUser", Convert.ToBase64String(Encoding.Unicode.GetBytes(TestKey1)));
+            userKey.SetValue("PCPPass", Convert.ToBase64String(Encoding.Unicode.GetBytes(TestKey2)));
+            userKey.Close();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -49,7 +69,7 @@ namespace PCParentTestProject
         [TestMethod]
         public void TestBrowserSniffer()
         {
-            var browserWindows = BrowserSniffer.PrintBrowserTabName();
+            var browserWindows = mockSniffer.PrintBrowserTabName();
 
             List<string> ListOfWords = new List<string>()
             {

@@ -18,18 +18,20 @@ namespace PCParentServiceApp
         {
             var retList = new List<KeyValuePair<string, string>>();
 
-            //logic to retrieve a registry key value
-            string rt = "HKEY_CURRENT_USER";
-            string sk = "PCParentKeys";  //your original key name will go here.
-            string kn = string.Format(@"{0}\{1}", rt, sk);
+            //Key for service is located under users/default keys
+            var subkey1 = Microsoft.Win32.Registry.Users.OpenSubKey(@".DEFAULT")
+                .OpenSubKey(@"Software")
+                .OpenSubKey(@"PCParentKeys");
 
             //get the keys out of the registry.
-            var userNameKey = Microsoft.Win32.Registry.GetValue(kn, "PCPUser", "novalue");
-            var passWordKey = Microsoft.Win32.Registry.GetValue(kn, "PCPPass", "novalue");
+            var userNameKey = subkey1.GetValue("PCPUser");
+            var passWordKey = subkey1.GetValue("PCPPass");
 
+            //convert the keys to regular strings
             var userNameRes = Encoding.Unicode.GetString(Convert.FromBase64String(userNameKey.ToString()));
             var passWordRes = Encoding.Unicode.GetString(Convert.FromBase64String(passWordKey.ToString()));
 
+            //return the keys to use in SMTP service hit
             retList.Add(new KeyValuePair<string, string>("User", userNameRes));
             retList.Add(new KeyValuePair<string, string>("Password", passWordRes));
 

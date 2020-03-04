@@ -12,14 +12,24 @@ namespace PCParentServiceApp
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        static void Main()
+        static void Main(string[] args)
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[]
+            PCParentService service = new PCParentService();
+
+            if (Environment.UserInteractive)
             {
-                new PCParentService()
-            };
-            ServiceBase.Run(ServicesToRun);
+                service.RunAsConsole(args);
+            }
+            else
+            {
+
+                ServiceBase[] ServicesToRun;
+                ServicesToRun = new ServiceBase[]
+                {
+                    new PCParentService()
+                };
+                ServiceBase.Run(ServicesToRun);
+            }
         }
     }
 }

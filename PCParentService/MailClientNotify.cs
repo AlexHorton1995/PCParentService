@@ -90,7 +90,7 @@ namespace PCParentServiceApp
                     {
                         client.Send(msg);
                         //TODO - put a logger.write event here
-                        logger.WriteTransactionToEventViewer();
+                        logger.WriteTransactionToEventViewer("Login Email Successfully Sent!");
 
                     }
                     catch (SmtpException smtpEx)

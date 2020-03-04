@@ -43,3 +43,6 @@ https://stackoverflow.com/questions/262280/how-can-i-know-if-a-process-is-runnin
 
 Grab Active Browser Windows
 https://stackoverflow.com/questions/40434679/c-sharp-get-all-open-browsing-tabs-in-all-instances-of-firefox?answertab=votes#tab-top
+
+Convert Windows Service to Console Application
+https://alastaircrabtree.com/how-to-run-a-dotnet-windows-service-as-a-console-app/
